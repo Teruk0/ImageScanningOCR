@@ -8,5 +8,6 @@ OCR Implementation through Javascript and Node.js codes
 2- The file test.js was an attempt at implementing it so that it would extract the text and output it into a pdf file but it failed.
 
 3- The image file that you select can be any from your computer though the result will vary depending on file type/quality/colors.
+(you have to reload the page every three images because it takes longer to do it).
 
 4- In order to make changes to the file just open the index.html file in an IDE OF YOUR CHOICE.
