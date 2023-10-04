@@ -1,34 +1,49 @@
+<!-- Include the Tesseract.js library -->
 <html>
     <head>
         <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
         <title>Tesseract Test</title>
     </head>
     <body>
+        <!-- Create a label and file input element for selecting a file to perform OCR on -->
         <label for="fileInput">Choose File to OCR:</label>
         <input type="file" id="fileInput" name="fileInput"/>
         <br />
         <br />
+        <!-- Create a div element to display the OCR result -->
         <div id="document-content">
         </div>
     </body>
     <script>
+        // Add an event listener to execute code after the DOM has been loaded
         document.addEventListener('DOMContentLoaded', function(){
+            // Get a reference to the file input element
             var fileInput = document.getElementById('fileInput');
+            // Add an event listener to the file input to handle file selection changes
             fileInput.addEventListener('change', handleInputChange);
         });
 
+        // Define a function to handle changes in the file input
         function handleInputChange(event){
+            // Get the input element that triggered the event
             var input = event.target;
+            // Get the selected file from the input
             var file = input.files[0];
+            // Log the selected file to the console
             console.log(file);
+            
+            // Use Tesseract.js to recognize text in the selected image file
             Tesseract.recognize(file)
+                // Log progress messages during OCR
                 .progress(function(message){
                     console.log(message);
                 })
+                // Once OCR is complete, update the content of the div with the recognized text
                 .then(function(result) {
-                var contentArea = document.getElementById('document-content');
-                 contentArea.innerHTML = result.text;
+                    var contentArea = document.getElementById('document-content');
+                    contentArea.innerHTML = result.text;
                 })
+                // Handle any errors that may occur during OCR
                 .catch(function(err){
                     console.error(err);
                 });
